@@ -6,23 +6,24 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 public class PersonalPage extends AbstractPage {
-	@FindBy(how = How.XPATH)
+	@FindBy(how = How.ID, using = "applicant0.personal.salutation-MR")
 	private WebElement maleButton;
-	@FindBy(how = How.XPATH)
+	@FindBy(how = How.ID, using = "applicant0.personal.salutation-MRS")
 	private WebElement femaleButton;
-	@FindBy(how = How.XPATH)
+	@FindBy(how = How.ID, using = "applicant0.personal.firstName")
 	private WebElement firstNameField;
-	@FindBy(how = How.XPATH)
+	@FindBy(how = How.ID, using = "applicant0.personal.lastName")
 	private WebElement surnameField;
-	@FindBy(how = How.XPATH)
+	@FindBy(how = How.ID, using = "applicant0.personal.birthDate")
 	private WebElement dateOfBirthField;
-	@FindBy(how = How.XPATH)
+	@FindBy(how = How.ID,using="applicant0.contacts.phoneMobile")
 	private WebElement phoneField;
-	@FindBy(how = How.XPATH)
+	@FindBy(how = How.ID, using="applicant0.contacts.email")
 	private WebElement emailField;
-	@FindBy(how = How.XPATH)
+	@FindBy(how = How.XPATH, using = "//input[@id='applicant0.conditions" +
+			".schufaAgreementAccepted']/following-sibling::span")
 	private WebElement agreeCheckBox;
-	@FindBy(how = How.XPATH)
+	@FindBy(how = How.ID, using = "cta_btn_0")
 	private WebElement nextButton;
 
 

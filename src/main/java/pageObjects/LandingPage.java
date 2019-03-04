@@ -14,7 +14,7 @@ public class LandingPage extends AbstractPage {
 	private       WebElement amountDropDown;
 	@FindBy(how = How.XPATH, using = ".//label[./div/span[text()='Laufzeit']]//div[@class='Select-value']")
 	private       WebElement runnigTimeDropDown;
-	@FindBy(how = How.XPATH, using = "//a[//span[@text()='Jetzt Kreditvergleich starten']]")
+	@FindBy(how = How.XPATH, using = "//span[text()='Jetzt Kreditvergleich starten']")
 	private       WebElement comparisonButton;
 	@FindBy(how = How.XPATH, using = "//a[1]")
 	private       WebElement loginForm;
@@ -25,7 +25,7 @@ public class LandingPage extends AbstractPage {
 		chooseDropdownListItem(useDpopdown, use);
 		chooseDropdownListItem(amountDropDown, amount);
 		chooseDropdownListItem(runnigTimeDropDown, runningTime);
-		clickOn(comparisonButton);
+		checkCheckbox(comparisonButton);
 	}
 
 

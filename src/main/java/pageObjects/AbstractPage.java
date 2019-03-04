@@ -50,7 +50,7 @@ public abstract class AbstractPage {
 		scriptToCheck = new StringJoiner(System.lineSeparator())
 				.add("return ((typeof jQuery !== 'undefined') && (jQuery.active == 0))")
 				.toString();
-		final WebDriverWait wait = new WebDriverWait(driver, 30);
+		final WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(e -> isPageLoaded());
 	}
 
