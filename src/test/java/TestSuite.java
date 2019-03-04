@@ -18,7 +18,7 @@ public class TestSuite {
 	@Test
 	public void checkIdPageLoaded() {
 		landingPage.open(LANDING_PAGE_URL);
-		landingPage.fillLoanRequest("Live", "2750", "24 month");
+		landingPage.fillLoanRequest("Wohnen", "2.750", "24 Monate");
 		personalPage.fillPersonalData(getUserData());
 		Assert.assertTrue(incomePage.isPageLoaded());
 	}
@@ -30,7 +30,6 @@ public class TestSuite {
 	}
 
 	private User getUserData() {
-		return new User();
+		return new User(false,"asd","asd","01.03.1964","0123456789","test@gmail.com");
 	}
-
 }

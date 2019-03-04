@@ -1,35 +1,63 @@
 package pageObjects;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.DriverManager;
 
-//TODO: make class abstract
-public class AbstractPage {
-	private WebDriver driver = DriverManager.getDriver();
+import java.util.StringJoiner;
 
-	public AbstractPage(){
-		PageFactory.initElements(driver,AbstractPage.class);
+//TODO: make class abstract
+public abstract class AbstractPage {
+	private static String    scriptToCheck;
+	private static WebDriver driver = DriverManager.getDriver();
+
+
+	public AbstractPage() {
+		PageFactory.initElements(driver,this);
 	}
 
 	public void open(String url) {
 		driver.get(url);
 	}
 
-	public void clickOn(WebElement button) {
+	protected void clickOn(WebElement button) {
 		button.click();
 	}
 
-	public void chooseDropdownListItem(WebElement dropdownElement, String itemName) {
-		Select select = new Select(dropdownElement);
-		select.selectByVisibleText(itemName);
+	protected void chooseDropdownListItem(WebElement dropdownElement, String itemName) {
+		clickOn(dropdownElement);
+		WebElement element = driver.findElement(By.xpath(".//div[@class='Calulator__form-inputs']//*[contains(text()," +
+				"'"+itemName+"')]"));
+		clickOn(element);
 	}
 
-	public void fillTextField(WebElement element, String text) {
+	protected void fillTextField(WebElement element, String text) {
 		element.clear();
 		element.sendKeys(text);
+	}
+
+	protected void checkCheckbox(WebElement checkBox) {
+		if (!checkBox.isSelected())
+			checkBox.click();
+	}
+
+	public  void waitForAsyncExecution() {
+		scriptToCheck = new StringJoiner(System.lineSeparator())
+				.add("return ((typeof jQuery !== 'undefined') && (jQuery.active == 0))")
+				.toString();
+		final WebDriverWait wait = new WebDriverWait(driver, 30);
+		wait.until(e -> isPageLoaded());
+	}
+
+	public Boolean isPageLoaded() {
+		final Object scriptResult = ((JavascriptExecutor) driver)
+				.executeScript(scriptToCheck);
+		return Boolean.parseBoolean(String.valueOf(scriptResult));
 	}
 
 }

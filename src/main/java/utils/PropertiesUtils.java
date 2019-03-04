@@ -19,9 +19,8 @@ public class PropertiesUtils {
 	}
 
 	private static Properties readPropFile() {
-		String     environment = System.getProperty(PROPERTY_FILE_NAME);
 		Properties prop        = new Properties();
-		try (InputStream input = PropertiesUtils.class.getClassLoader().getResourceAsStream(environment)) {
+		try (InputStream input = PropertiesUtils.class.getClassLoader().getResourceAsStream(PROPERTY_FILE_NAME)) {
 			prop.load(input);
 		} catch (IOException e) {
 //			log.("Can't read property from file!", new RuntimeException(e));

@@ -33,12 +33,10 @@ public class PersonalPage extends AbstractPage {
 			clickOn(femaleButton);
 		fillTextField(firstNameField,userData.getFirstName());
 		fillTextField(surnameField,userData.getSurname());
-		fillTextField()
-		fillTextField()
-		fillTextField()
-		fillTextField()
-
-
+		fillTextField(dateOfBirthField,userData.getDateOdBirth());
+		fillTextField(phoneField,userData.getPhoneNumber());
+		fillTextField(emailField,userData.getEmail());
+		checkCheckbox(agreeCheckBox);
+		clickOn(nextButton);
 	}
-
 }
