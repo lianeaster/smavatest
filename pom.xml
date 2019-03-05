@@ -7,7 +7,7 @@
     <groupId>de.smava</groupId>
     <artifactId>smava-test</artifactId>
     <version>1.0-SNAPSHOT</version>
-
+<!--TODO: add java version here and remove versions to properties-->
 <dependencies>
     <dependency>
         <groupId>org.testng</groupId>
