@@ -5,7 +5,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import javax.swing.*;
+
 public class LandingPage extends AbstractPage {
+    private static final String HEADER_NAME ="Deutschlands günstige Top Kredite" ;
     @FindBy(how = How.XPATH, using = ".//label[./div/span[text()='Verwendung']]//div[@class='Select-value']")
     private WebElement useDpopdown;
     @FindBy(how = How.XPATH, using = ".//label[./div/span[text()='Nettokreditbetrag']]//div[@class='Select-value']")
@@ -18,6 +21,8 @@ public class LandingPage extends AbstractPage {
     private WebElement openLoginFormButton;
     @FindBy(how = How.XPATH, using = "//*[@class[contains(.,'LoginForm__form')]]")
     private WebElement loginForm;
+    @FindBy(how=How.TAG_NAME,using = "h1")
+    private WebElement pageHeaderElement;
 
     public void fillLoanRequest(String use, String amount, String runningTime) {
         chooseDropdownListItem(useDpopdown, use);
@@ -27,13 +32,18 @@ public class LandingPage extends AbstractPage {
     }
 
 
-    public void fillLoginForm(String login, String password) {
+    public void fillLoginForm(String login, String password)  {
         openLoginFormButton.click();
         WebElement emailElement = loginForm.findElement(By.name("email"));
         WebElement passElement = loginForm.findElement(By.name("password"));
-        WebElement loginButton = loginForm.findElement(By.tagName("button"));
+        WebElement loginButtonWithLock = loginForm.findElement(By.xpath("./button/i"));
         fillTextField(emailElement, login);
         fillTextField(passElement, password);
-        clickOn(loginButton);
+        clickOn(loginButtonWithLock);
+    }
+
+    @Override
+    public Boolean isPageLoaded() {
+        return super.isPageLoaded() && pageHeaderElement.getText().equals(HEADER_NAME);
     }
 }

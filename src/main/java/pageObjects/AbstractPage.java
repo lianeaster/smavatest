@@ -5,15 +5,11 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.DriverManager;
 
-import java.util.StringJoiner;
-
 //TODO: make class abstract
 public abstract class AbstractPage {
-    private static final String SCRIPT_TO_CHECK="return ((typeof jQuery !== 'undefined') && (jQuery.active == 0))";
     private static WebDriver driver = DriverManager.getDriver();
 
 
@@ -47,7 +43,7 @@ public abstract class AbstractPage {
     }
 
     public void waitForAsyncExecution() {
-        final WebDriverWait wait = new WebDriverWait(driver, 5);
+        final WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(e -> isPageLoaded());
     }
 

@@ -10,6 +10,8 @@ import static utils.PropertiesUtils.getProperty;
 
 public class TestSuite extends BaseTest {
     private static final String LANDING_PAGE_URL = getProperty("base_url");
+    private static final String USER = getProperty("test_user");
+    private static final String PASSWORD = getProperty("test_pass");
     private final LandingPage landingPage = new LandingPage();
     private final PersonalPage personalPage = new PersonalPage();
     private final IncomePage incomePage = new IncomePage();
@@ -18,7 +20,7 @@ public class TestSuite extends BaseTest {
     @Test
     public void checkWrongLoginAttempt() {
         landingPage.open(LANDING_PAGE_URL);
-        landingPage.fillLoginForm("asd@gmail.com", "sdf");
+        landingPage.fillLoginForm(USER, PASSWORD);
         reLoginPage.waitForAsyncExecution();
         Assert.assertTrue(reLoginPage.isPageLoaded());
     }
