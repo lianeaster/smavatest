@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-public class PersonalPage extends AbstractPage {
+public class PersonalPage extends BasePage {
 	@FindBy(how = How.ID, using = "applicant0.personal.salutation-MR")
 	private WebElement maleButton;
 	@FindBy(how = How.ID, using = "applicant0.personal.salutation-MRS")
@@ -39,5 +39,10 @@ public class PersonalPage extends AbstractPage {
 		fillTextField(emailField,userData.getEmail());
 		checkCheckbox(agreeCheckBox);
 		clickOn(nextButton);
+	}
+
+	@Override
+	public Boolean isHeaderCorrect() {
+		return null;
 	}
 }

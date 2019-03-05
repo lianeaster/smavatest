@@ -13,7 +13,6 @@ public class PropertiesUtils {
     private PropertiesUtils() {
     }
 
-
     public static String getProperty(String propertyName) {
         return readPropFile().getProperty(propertyName);
     }
@@ -23,7 +22,7 @@ public class PropertiesUtils {
         try (InputStream input = PropertiesUtils.class.getClassLoader().getResourceAsStream(PROPERTY_FILE_NAME)) {
             prop.load(input);
         } catch (IOException e) {
-//			log.("Can't read property from file!", new RuntimeException(e));
+			log.error("Can't read property from file!", new RuntimeException(e));
         }
         return prop;
     }

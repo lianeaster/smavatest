@@ -1,28 +1,30 @@
 import dto.User;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.IncomePage;
-import pageObjects.LandingPage;
-import pageObjects.PersonalPage;
-import pageObjects.ReloginPage;
+import pageObjects.*;
 
+import static pageObjects.BasePage.isPageLoaded;
+import static pageObjects.BasePage.waitForAsyncExecution;
 import static utils.PropertiesUtils.getProperty;
 
 public class TestSuite extends BaseTest {
     private static final String LANDING_PAGE_URL = getProperty("base_url");
     private static final String USER = getProperty("test_user");
     private static final String PASSWORD = getProperty("test_pass");
-    private final LandingPage landingPage = new LandingPage();
-    private final PersonalPage personalPage = new PersonalPage();
-    private final IncomePage incomePage = new IncomePage();
-    private final ReloginPage reLoginPage = new ReloginPage();
+    private  LandingPage landingPage = new LandingPage();
+    private  PersonalPage personalPage = new PersonalPage();
+    private  IncomePage incomePage = new IncomePage();
+    private  ReloginPage reLoginPage = new ReloginPage();
 
     @Test
     public void checkWrongLoginAttempt() {
         landingPage.open(LANDING_PAGE_URL);
         landingPage.fillLoginForm(USER, PASSWORD);
-        reLoginPage.waitForAsyncExecution();
-        Assert.assertTrue(reLoginPage.isPageLoaded());
+        String s = BasePage.identifyPage();
+        waitForAsyncExecution();
+        Boolean isHeaderCorrect = s.equals(LANDING_PAGE_URL) ?
+                landingPage.isHeaderCorrect() : reLoginPage.isHeaderCorrect();
+        Assert.assertTrue(isPageLoaded()&&isHeaderCorrect);
     }
 
     @Test
@@ -30,8 +32,8 @@ public class TestSuite extends BaseTest {
         landingPage.open(LANDING_PAGE_URL);
         landingPage.fillLoanRequest("Wohnen", "2.750", "24 Monate");
         personalPage.fillPersonalData(getUserData());
-        incomePage.waitForAsyncExecution();
-        Assert.assertTrue(incomePage.isPageLoaded());
+        IncomePage.waitForAsyncExecution();
+        Assert.assertTrue(isPageLoaded()&&incomePage.isHeaderCorrect());
     }
 
 

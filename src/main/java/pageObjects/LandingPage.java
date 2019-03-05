@@ -5,9 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import javax.swing.*;
-
-public class LandingPage extends AbstractPage {
+public class LandingPage extends BasePage {
     private static final String HEADER_NAME ="Deutschlands günstige Top Kredite" ;
     @FindBy(how = How.XPATH, using = ".//label[./div/span[text()='Verwendung']]//div[@class='Select-value']")
     private WebElement useDpopdown;
@@ -43,7 +41,7 @@ public class LandingPage extends AbstractPage {
     }
 
     @Override
-    public Boolean isPageLoaded() {
-        return super.isPageLoaded() && pageHeaderElement.getText().equals(HEADER_NAME);
+    public Boolean isHeaderCorrect() {
+        return pageHeaderElement.getText().equals(HEADER_NAME);
     }
 }

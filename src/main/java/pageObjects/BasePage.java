@@ -8,13 +8,16 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.DriverManager;
 
-//TODO: make class abstract
-public abstract class AbstractPage {
+public abstract class BasePage {
     private static WebDriver driver = DriverManager.getDriver();
 
 
-    public AbstractPage() {
+    public BasePage() {
         PageFactory.initElements(driver, this);
+    }
+
+    public static String identifyPage() {
+        return driver.getCurrentUrl();
     }
 
     public void open(String url) {
@@ -42,14 +45,15 @@ public abstract class AbstractPage {
             checkBox.click();
     }
 
-    public void waitForAsyncExecution() {
+    public static void waitForAsyncExecution() {
         final WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(e -> isPageLoaded());
     }
 
-    public Boolean isPageLoaded() {
+    public static Boolean isPageLoaded() {
         final Object scriptResult = ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
         return Boolean.parseBoolean(String.valueOf(scriptResult));
     }
 
+    public abstract Boolean isHeaderCorrect();
 }
